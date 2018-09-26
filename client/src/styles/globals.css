@@ -1,79 +1,79 @@
 html {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
 }
 
-body  {
-    margin: 100px 20% 0% 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+body {
+  margin: 100px 20% 0% 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media screen and (max-width: 480px) {
-    body {
-        margin: 10px;
-    }
+  body {
+    margin: 10px;
+  }
 }
 
-
 .shifts {
-    border-radius: 5px;
-    border: solid #EAEDF2 1px;
+  border-radius: 5px;
+  border: solid #eaedf2 1px;
 }
 
 .btn {
-    min-height: 30px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 14px;
-    min-width: 85px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor:pointer;
+  min-height: 30px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .btn-cancel {
-    color:#E2600A;
-    border: solid #FE93B3 1px;
+  color: #e2600a;
+  border: solid #fe93b3 1px;
 }
 
 .btn-cancel.btn-disabled {
-    color: #eed2ef;
-    border: solid #eed2ef 1px;
+  color: #eed2ef;
+  border: solid #eed2ef 1px;
 }
 
 .btn-book {
-    color:#16A64D;
-    border: solid #55CB82 1px;
+  color: #16a64d;
+  border: solid #55cb82 1px;
 }
 
 .btn-book.btn-disabled {
-    color:#CAEFD8;
-    border: solid #CAEFD8 1px;
+  color: #caefd8;
+  border: solid #caefd8 1px;
 }
 
-
-
+.btn-disabled {
+  cursor: not-allowed;
+}
 
 .shifts__content {
-    padding: 11px 5% 11px 2%;
-    border-bottom: solid #F6F7FA 1px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  padding: 11px 5% 11px 2%;
+  border-bottom: solid #f6f7fa 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .shifts__status {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .shifts__status.shifts__status-booked {
-    color: #4F6C92;
+  color: #4f6c92;
 }
 
-
 .shifts__status.shifts__status-overlapping {
-    color: #E2006A;
+  color: #e2006a;
 }
