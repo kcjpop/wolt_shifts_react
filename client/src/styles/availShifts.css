@@ -1,0 +1,32 @@
+.shifts__nav {
+    padding: 4% 8%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.shifts__tab {
+    color: #A4B8D3;
+}
+
+.shifts__tab--selected {
+    color: #1D4FAE;
+}
+
+.avail-shifts__content-left {
+    width: 30%;
+}
+
+.avail-shifts__content-right {
+    width: 70%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.avail-shifts__content-right span {
+    margin-right: 9%;
+}
+
+img {
+    width: 30%;
+}

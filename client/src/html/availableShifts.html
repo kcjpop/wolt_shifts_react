@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Wolt Shifts</title>
+</head>
+<body>
+    <header class="universal-header">
+        <nav class="nav">
+            <a class="nav__tab" href="./index.html">My Shifts</a>
+            <a class="nav__tab nav__tab--selected" href="./availableShifts.html">Available Shifts</a>
+        </nav>
+    </header>
+    <section class="shifts">
+        <nav class="shifts__nav">
+            <a class="shifts__tab shifts__tab--selected">
+                <span class="shifts__location">Helsinki</span>
+                <span class="shifts__numbers">(5)</span>
+            </a>
+            <a class="shifts__tab">
+                <span class="shifts__location">Tampere</span>
+                <span class="shifts__numbers">(3)</span>
+            </a>
+            <a class="shifts__tab">
+                <span class="shifts__location">Turku</span>
+                <span class="shifts__numbers">(8)</span>
+            </a>
+        </nav>
+        <div class="shifts__rows">
+            <div class="shifts_row">
+                <header class="shifts__header">
+                    <span class="shifts__text shifts__text--size-big">Today</span>
+                </header>
+
+                <div class="shifts__content">
+                    <div class="avail-shifts__content-left">
+                        <span class="shifts__time">12:00-14:00</span>
+                    </div>
+                    <div class="avail-shifts__content-right">
+                        <span class="shifts__status shifts__status-booked">Booked</span>
+                        <button class="btn btn-cancel btn-disabled">Cancel</button>
+                    </div>
+                </div>
+
+                <div class="shifts__content">
+                    <div class="avail-shifts__content-left">
+                        <span class="shifts__time">13:00-15:00</span>
+                    </div>
+                    <div class="avail-shifts__content-right">
+                        <span class="shifts__status shifts__status-overlapping">Overlapping</span>
+                        <button class="btn btn-book btn-disabled">Book</button>
+                    </div>
+                </div>
+                <div class="shifts__content">
+                    <div class="avail-shifts__content-left">
+                        <span class="shifts__time">14:00-16:00</span>
+                    </div>
+                    <div class="avail-shifts__content-right">
+                        <span class="shifts__status shifts__status-booked">Booked</span>
+                        <button class="btn btn-cancel">Cancel</button>
+                    </div>
+                </div>
+                <div class="shifts__content">
+                    <div class="avail-shifts__content-left">
+                        <span class="shifts__time">16:00-18:00</span>
+                    </div>
+                    <div class="avail-shifts__content-right">
+                        <span class="shifts__status"></span>
+                        <button class="btn btn-book">Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shifts_row">
+                <header class="shifts__header">
+                    <span class="shifts__text shifts__text--size-big">September 21</span>
+                </header>
+                <div class="shifts__content">
+                    <div class="avail-shifts__content-left">
+                        <span class="shifts__time">16:00-18:00</span>
+                    </div>
+                    <div class="avail-shifts__content-right">
+                        <span class="shifts__status"></span>
+                        <button class="btn btn-book btn-spin"><img src="./images/spinner_green.svg"/></button>
+                    </div>
+                        
+                </div>
+            </div>
+
+            <div class="shifts_row">
+                <header class="shifts__header">
+                    <span class="shifts__text shifts__text--size-big">September 22</span>
+                </header>
+                <div class="shifts__content">
+                    <div class="avail-shifts__content-left">
+                        <span class="shifts__time">17:00-18:30</span>
+                    </div>
+                    <div class="avail-shifts__content-right">
+                        <span class="shifts__status"></span>
+                        <button class="btn btn-book">Book</button>
+                    </div>
+                        
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+</body>
+</html>

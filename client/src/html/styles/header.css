@@ -1,0 +1,27 @@
+.universal-header {
+    color:#F1F3F6;
+    padding-left: 16px;
+    padding-bottom: 15px;
+    
+}
+
+.nav {
+    font-size: 20px;
+}
+
+.nav__tab {
+    color:#A4B8D3;
+}
+
+.nav__tab--selected {
+    color: #1D4FAE;
+}
+
+.nav__tab:first-child {
+    padding-right:5%;
+}
+
+a {
+    text-decoration: none;
+}
+
