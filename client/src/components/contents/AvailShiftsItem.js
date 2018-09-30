@@ -1,62 +1,72 @@
-import React from "react";
+import React, { Component } from "react";
 import moment from "moment";
 
-const _btnColor = bookStatus =>
-  bookStatus ? "btn btn-cancel" : "btn btn-book";
+class AvailShiftsItem extends Component {
+  state = {
+    shift: this.props.shift,
+    startTime: this.props.startTime,
+    endTime: this.props.endTime,
+    bookStatus: this.props.bookStatus,
+    disabled: false
+  };
 
-const _checkTime = () => {
-  const currentTime = new Date().getTime();
-  console.log(currentTime);
-};
+  _btnColor = () => (this.state.bookStatus ? "btn btn-cancel" : "btn btn-book");
 
-let disabled = false;
+  // _btnDisabled = () => {
+  //   if (this.state.bookStatus) {
+  //     this.setState({
+  //       disabled: true
+  //     });
+  //     return "btn-disabled";
+  //   }
+  // };
 
-const _btnDisabled = (bookStatus, startTime) => {
-  if (bookStatus) {
-    disabled = true;
-    return "btn-disabled";
-  }
-};
+  _disabledReason = () => {
+    if (this.state.bookStatus) {
+      return "booked";
+    }
+  };
 
-const _disableReason = bookStatus => {
-  if (bookStatus) {
-    return "booked";
-  }
-};
+  _bookShift = async e => {
+    const resp = await fetch(`/shifts/${this.state.shift.id}/book`, {
+      method: "POST"
+    });
+    console.log("Book resp:", resp);
 
-const AvailShiftsItem = ({
-  shift,
-  startTime,
-  endTime,
-  bookStatus,
-  _bookShift
-}) => {
-  return (
-    <div className="shifts__content">
-      <div className="avail-shifts__content-left">
-        <span className="shifts__time">
-          {startTime}-{endTime}
-        </span>
-      </div>
-      <div className="avail-shifts__content-right">
-        <span className="shifts__status shifts__status-booked">
-          {_disableReason(bookStatus)}
-        </span>
-        {/* An here is the btn !!!! */}
-        <button
-          className={`${_btnColor(bookStatus)} ${_btnDisabled(
-            bookStatus,
-            shift.startTime
-          )}`}
-          onClick={_bookShift.bind(this, shift.id)}
-          disabled={disabled}
-        >
+    if (resp.status === 200) {
+      this.setState({
+        bookStatus: true
+      });
+    }
+  };
+
+  render() {
+    const { shift, bookStatus, startTime, endTime, disabled } = this.state;
+    return (
+      <div className="shifts__content">
+        <div className="avail-shifts__content-left">
+          <span className="shifts__time">
+            {startTime}-{endTime}
+            {bookStatus}
+          </span>
+        </div>
+        <div className="avail-shifts__content-right">
+          <span className="shifts__status shifts__status-booked">
+            {this._disabledReason()}
+          </span>
           {/* An here is the btn !!!! */}
-          {bookStatus ? "cancel" : "book"}
-        </button>
+          <button
+            className={`${this._btnColor()}`}
+            onClick={this._bookShift}
+            disabled={disabled}
+          >
+            {/* An here is the btn !!!! */}
+            {bookStatus ? "cancel" : "book"}
+          </button>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default AvailShiftsItem;

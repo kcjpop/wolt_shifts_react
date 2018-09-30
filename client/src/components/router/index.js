@@ -25,6 +25,7 @@ const AppRouter = () => {
                             path='/availshift/(Helsinki|Tampere|Turku)'
                             component={AvailShifts}
                         />
+                        <Redirect exact from='/availshift' to='/availshift/Helsinki' />
 
 
                         <Route component={PageNotFound} />
