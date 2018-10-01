@@ -5,7 +5,7 @@ import Spinner from "../../images/spinner_green.svg";
 
 import AvailShiftsRow from "./AvailShiftsRow";
 import { connect } from "react-redux";
-import { getAvailShifts } from "../../actions/availShifts";
+import { getAvailShiftsAsync } from "../../actions/availShifts";
 
 import moment from "moment";
 import _ from "lodash";
@@ -13,9 +13,7 @@ import _ from "lodash";
 class AvailShifts extends Component {
   componentDidMount() {
     console.log("compo did mount");
-    this.props.dispatch(getAvailShifts());
-    // const res = await this._callApi();
-    // await this.setState({ cityObj: res });
+    this.props.dispatch(getAvailShiftsAsync());
   }
 
   _renderAvailNavs = () => {
@@ -79,10 +77,12 @@ class AvailShifts extends Component {
 }
 
 const mapStateToProps = store => {
+  console.log('XXXX STORE:', store)
+  const {shiftsByCityObj, loading, error} =  store.availShifts
   return {
-  shiftsByCityObj: store.availShifts.shiftsByCityObj,
-  loading: store.availShifts.loading,
-  error: store.availShifts.error
+  shiftsByCityObj: shiftsByCityObj,
+  loading: loading,
+  error: error
 };
 }
 

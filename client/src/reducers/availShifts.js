@@ -1,5 +1,7 @@
-import initialState from "./initialState";
+import {initialState} from "./initialState";
 import * as types from "../actions/actionTypes";
+
+
 
 const availShiftsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -10,7 +12,6 @@ const availShiftsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        error: null
       };
 
     case types.GET_AVAIL_SHIFTS_SUCCESS:
@@ -32,8 +33,54 @@ const availShiftsReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.error,
-        shiftsByCityObj: {}
       };
+
+
+      case types.BOOK_SHIFTS_BEGIN:
+      console.log('!!! STATE in BOOK SHIFT !!!', state)
+        return {
+          ...state,
+          bookLoading: true
+        }
+
+      case types.BOOK_SHIFTS_SUCCESS:
+      console.log("^^^^^ state:", state.shiftsByCityObj[action.shift.area][action.date])
+      console.log(action)
+
+      state.shiftsByCityObj[action.shift.area][action.date] = state.shiftsByCityObj[action.shift.area][action.date].map(shiftObj => {
+          if (shiftObj.id === action.shift.id) {
+            return { ...shiftObj, ...action.bookedShift }
+          }
+            return shiftObj
+        })
+      return {
+        ...state,
+        bookLoading: false,
+
+      }
+
+
+        // bookLoading: false
+      // }
+      // return state.map(stateItem => {
+      //     if (stateItem.id === shift_id.id) {
+      //       return {...stateItem, ...action.newAmount}
+      //     }
+      //       return stateItem
+      //   })
+
+        // return {
+        //   ...state,
+        //   loading: false,
+        //   booked: true
+        // }
+
+      case types.BOOK_SHIFTS_FAILURE:
+        return {
+          ...state,
+          loading: false,
+          error: action.error
+        }
 
     default:
       // ALWAYS have a default case in a reducer

@@ -16,23 +16,23 @@ export const getAvailShiftsFailure = error => ({
   error
 });
 
-export const getAvailShifts = () => {
-  console.log('ACTION')
+export const getAvailShiftsAsync = () => {
+  // console.log('ACTION')
   return dispatch => {
     dispatch(getAvailShiftsBegin());
     return fetch("/shifts")
       .then(handleErrors)
       .then(res => res.json())
       .then(json => {
-        console.log('json:',json)
+        // console.log('json:',json)
         return sortAvailShiftsByCity(json);
       })
       .then(sortByCityObj => {
-        console.log('sortByCityObj:',sortByCityObj)
+        // console.log('sortByCityObj:',sortByCityObj)
         return groupByDates(sortByCityObj);
       })
       .then(groupByDates => {
-        console.log('groupByDates:',groupByDates)
+        // console.log('groupByDates:',groupByDates)
         dispatch(getAvailShiftsSucess(groupByDates));
         return groupByDates;
       })
@@ -53,12 +53,44 @@ const sortAvailShiftsByCity = availshiftsList => {
 
   const cities = [...new Set(orderedShiftsList.map(item => item.area))].sort();
 
-  let sortByCityObj = {};
-  cities.map(cityName => {
-    sortByCityObj[cityName] = orderedShiftsList.filter(
-      shift => shift.area === cityName
-    );
-  });
+  // let sortByCityObj = {};
+  // cities.map(cityName => {
+  //   sortByCityObj[cityName] = orderedShiftsList.filter(
+  //     shift => shift.area === cityName
+  //   );
+  // });
+  // console.log('*********about to go FOR MAP !!!!')
+
+  //  Pure funcitonal functions
+  const forMap = (target, shiftList) => (cityName, idx) => {
+    return target[cityName] = shiftList.filter(shiftObj => shiftObj.area === cityName)
+  }
+
+  const formaP = (cities) => (target, shiftList) => {
+    for (let cityName of cities) {
+      target[cityName] = shiftList.filter(
+          shift => shift.area === cityName
+        )
+    }
+    return target
+  }
+
+
+  const sortByCityObj = formaP(cities)({},orderedShiftsList)
+  // const sortByCityObj = cities.map(forMap({},orderedShiftsList))//returns array due to .map
+  // console.log('!!!!!!!!!!!!!!End of formap',sortByCityObj)
+
+  // const animals = (first) => {
+  //   return second => {
+  //       const result = `I love ${first} and ${second}`
+  //       return result
+  //     }
+  // }
+  // const dog = animals('dog')
+  // dog('cat') // I love dog and cat
+  // dog('bird') // I love dog and bird
+
+  // cat = animals('cat')('dog')
 
   return sortByCityObj;
 };
