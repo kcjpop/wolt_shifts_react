@@ -2,7 +2,7 @@ import * as types from './actionTypes'
 
 export const bookShiftsAsync = (shift, date) => {
   return dispatch => {
-    dispatch(bookShiftsBegin())
+    dispatch(bookShiftsBegin(shift, date))
     return fetch(`/shifts/${shift.id}/book`, {
       method: "POST"})
       // .then(handleErrors)
@@ -21,8 +21,10 @@ export const bookShiftsAsync = (shift, date) => {
 
 }
 
-export const bookShiftsBegin = () => ({
-  type: types.BOOK_SHIFTS_BEGIN
+export const bookShiftsBegin = (shift, date) => ({
+  type: types.BOOK_SHIFTS_BEGIN,
+  shift,
+  date
 })
 
 export const bookShiftsSuccess = (shift, date, bookedShift) => ({

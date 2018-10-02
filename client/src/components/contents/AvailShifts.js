@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import AvailShiftsNav from "./AvailShiftsNav";
-import Spinner from "../../images/spinner_green.svg";
+
 
 import AvailShiftsRow from "./AvailShiftsRow";
 import { connect } from "react-redux";
@@ -46,8 +46,7 @@ class AvailShifts extends Component {
           key={shortDate}
           eachDateObjList={shiftsByCityObj[cityName][dateKey]}
           date={shortDate}
-          shiftAmount={shiftsByCityObj[cityName][dateKey].length}
-          // _bookShift={this._bookShift}
+          // shiftAmount={shiftsByCityObj[cityName][dateKey].length}
         />
       );
     }
@@ -55,6 +54,7 @@ class AvailShifts extends Component {
   };
 
   render() {
+    console.log(333, this.props)
     const { error, loading } = this.props;
 
     if (error) {
@@ -76,15 +76,11 @@ class AvailShifts extends Component {
   }
 }
 
-const mapStateToProps = store => {
-  console.log('XXXX STORE:', store)
-  const {shiftsByCityObj, loading, error} =  store.availShifts
-  return {
-  shiftsByCityObj: shiftsByCityObj,
-  loading: loading,
-  error: error
-};
-}
 
+
+// const mapStateToProps = store => ({
+//   availShifts: store.availShifts
+// })
+const mapStateToProps = store => ({ ...store.availShifts })
 
 export default connect(mapStateToProps)(AvailShifts);

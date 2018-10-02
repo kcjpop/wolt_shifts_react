@@ -4,18 +4,18 @@ import moment from "moment";
 import { connect } from "react-redux"
 import {bookShiftsAsync} from "../../actions/bookShifts"
 
+import ReactSVG from 'react-svg'
+
+
 class AvailShiftsItem extends Component {
 
   state = {
-    shift: this.props.shift,
-    startTime: this.props.startTime,
-    endTime: this.props.endTime,
-    bookStatus: this.props.bookStatus,
     disabled: false,
-    date: this.props.date
   };
 
-  _btnColor = () => (this.state.bookStatus ? "btn btn-cancel" : "btn btn-book");
+
+
+  _btnColor = () => (this.props.bookStatus ? "btn btn-cancel" : "btn btn-book");
 
   // _btnDisabled = () => {
   //   if (this.state.bookStatus) {
@@ -27,54 +27,42 @@ class AvailShiftsItem extends Component {
   // };
 
   _disabledReason = () => {
-    if (this.state.bookStatus) {
+    if (this.props.bookStatus) {
       return "booked";
     }
   };
 
-  //
-  // _bookShift = async e => {
-  //   const resp = await fetch(`/shifts/${this.state.shift.id}/book`, {
-  //     method: "POST"
-  //   });
-  //   console.log("Book resp:", resp);
-  //
-  //   if (resp.status === 200) {
-  //     this.setState({
-  //       bookStatus: true
-  //     });
-  //   }
-  // };
+
 
   _handleBookShift = () => {
-    let {shift, date} = this.state
+    let {shift, date} = this.props
     date = date + ', 2018'
     const { dispatch } = this.props
     dispatch(bookShiftsAsync(shift, date))
-      .then(() => console.log(99, this.props.availShifts))
+    console.log(123, shift)
+
   }
 
-  // getShiftDataFromStore() {
-  //   shift: this.props.shift,
-  //   startTime: this.props.startTime,
-  //   endTime: this.props.endTime,
-  //   bookStatus: this.props.bookStatus,
-  //   disabled: false,
-  //   date: this.props.date
-  //
-  //   this.props.availShifts
-  // }
+  handleButtonValue = () => {
+    const { bookLoading, bookStatus} = this.props
+    if (bookLoading) {
+      return <ReactSVG src="../../images/spinner_green.svg" />
+
+    }
+    else {
+      return bookStatus ? "cancel" : "book"
+    }
+  }
+
+
 
 
   render() {
-    const { availShifts, bookShifts } = this.props
 
-    const {shift, startTime, endTime, bookStatus } = this.props
+    const {shift, startTime, endTime, bookStatus, bookLoading } = this.props
     const {disabled} = this.state
 
-    const { booked } = this.props.shift;
 
-    console.log({ booked, disabled, startTime, endTime })
 
     return (
       <div className="shifts__content">
@@ -88,15 +76,13 @@ class AvailShiftsItem extends Component {
           <span className="shifts__status shifts__status-booked">
             {this._disabledReason()}
           </span>
-          {/* An here is the btn !!!! */}
+
           <button
             className={`${this._btnColor()}`}
             onClick={this._handleBookShift}
-            // onClick={this._bookShift}
             disabled={disabled}
           >
-            {/* An here is the btn !!!! */}
-            {bookStatus ? "cancel" : "book"}
+            {this.handleButtonValue()}
           </button>
         </div>
       </div>
@@ -104,8 +90,9 @@ class AvailShiftsItem extends Component {
   }
 }
 
-const mapStateToProps = (reduxStore) => ({
-  availShifts: reduxStore.availShifts,
-})
 
-export default connect(mapStateToProps)(AvailShiftsItem);
+
+
+
+// Connect to use dispatch
+export default connect()(AvailShiftsItem);

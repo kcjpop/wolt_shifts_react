@@ -49,7 +49,9 @@ const handleErrors = response => {
 };
 
 const sortAvailShiftsByCity = availshiftsList => {
-  const orderedShiftsList = _.orderBy(availshiftsList, "startTime", "asc");
+  const bookLoaidngAdded = availshiftsList.map(shiftObj =>  ({...shiftObj, bookLoading:false}))
+
+  const orderedShiftsList = _.orderBy(bookLoaidngAdded, "startTime", "asc");
 
   const cities = [...new Set(orderedShiftsList.map(item => item.area))].sort();
 

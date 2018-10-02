@@ -8,7 +8,6 @@ const availShiftsReducer = (state = initialState, action) => {
     case types.GET_AVAIL_SHIFTS_BEGIN:
       // Mark the state as "loading" so we can show a spinner or something
       // Also, reset any errors. We're starting fresh.
-      console.log('state in begin reducer:',state)
       return {
         ...state,
         loading: true,
@@ -38,10 +37,20 @@ const availShiftsReducer = (state = initialState, action) => {
 
       case types.BOOK_SHIFTS_BEGIN:
       console.log('!!! STATE in BOOK SHIFT !!!', state)
-        return {
-          ...state,
-          bookLoading: true
-        }
+      console.log(2222,action)
+
+      state.shiftsByCityObj[action.shift.area][action.date] = state.shiftsByCityObj[action.shift.area][action.date].map(shiftObj => {
+          if (shiftObj.id === action.shift.id) {
+            // return { ...shiftObj, ...action.bookedShift }
+            console.log(1111, shiftObj, {...shiftObj, bookLading:true})
+            return { ...shiftObj, bookLoading:true }
+          }
+            return shiftObj
+        })
+      return {
+        ...state, state
+      }
+
 
       case types.BOOK_SHIFTS_SUCCESS:
       console.log("^^^^^ state:", state.shiftsByCityObj[action.shift.area][action.date])
@@ -49,31 +58,16 @@ const availShiftsReducer = (state = initialState, action) => {
 
       state.shiftsByCityObj[action.shift.area][action.date] = state.shiftsByCityObj[action.shift.area][action.date].map(shiftObj => {
           if (shiftObj.id === action.shift.id) {
-            return { ...shiftObj, ...action.bookedShift }
+            // return { ...shiftObj, ...action.bookedShift }
+            return { ...shiftObj, ...action.bookedShift, bookLoading: false }
           }
             return shiftObj
         })
       return {
-        ...state,
-        bookLoading: false,
-
+        ...state, state
       }
 
 
-        // bookLoading: false
-      // }
-      // return state.map(stateItem => {
-      //     if (stateItem.id === shift_id.id) {
-      //       return {...stateItem, ...action.newAmount}
-      //     }
-      //       return stateItem
-      //   })
-
-        // return {
-        //   ...state,
-        //   loading: false,
-        //   booked: true
-        // }
 
       case types.BOOK_SHIFTS_FAILURE:
         return {
