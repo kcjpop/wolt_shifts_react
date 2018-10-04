@@ -4,12 +4,11 @@ import moment from "moment";
 import AvailShiftsItemHeader from "./AvailShiftsItemHeader";
 import AvailShiftsItem from "./AvailShiftsItem";
 
-import { connect } from "react-redux";
-
-const _renderAvailShiftsItems = shiftsArr => {
-  return shiftsArr.map(shift => {
+const _renderAvailShiftsItems = (eachDateObjList, date) => {
+  return eachDateObjList.map(shift => {
     const startTime = moment(shift.startTime).format("HH:mm");
     const endTime = moment(shift.endTime).format("HH:mm");
+
     return (
       <AvailShiftsItem
         key={shift.id}
@@ -17,19 +16,21 @@ const _renderAvailShiftsItems = shiftsArr => {
         bookStatus={shift.booked}
         startTime={startTime}
         endTime={endTime}
-        // _bookShift={_bookShift}
-        // disabled={false}
+        date={date}
+        btnLoading={shift.btnLoading}
+        overlapped={shift.overlapped}
+        timePassed={shift.timePassed}
       />
     );
   });
 };
 
-const AvailShiftsRow = ({ eachDateObjList, date }) => {
+const AvailShiftsRow = props => {
+  const { eachDateObjList, date } = props;
   return (
-    <div class="shifts_row">
+    <div className="shifts_row">
       <AvailShiftsItemHeader date={date} />
-
-      {_renderAvailShiftsItems(eachDateObjList)}
+      {_renderAvailShiftsItems(eachDateObjList, date)}
     </div>
   );
 };

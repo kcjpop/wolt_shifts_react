@@ -17,28 +17,24 @@ export const getAvailShiftsFailure = error => ({
 });
 
 export const getAvailShiftsAsync = () => {
-  // console.log('ACTION')
+  console.log("GET SHIFT ACTION");
   return dispatch => {
     dispatch(getAvailShiftsBegin());
     return fetch("/shifts")
       .then(handleErrors)
       .then(res => res.json())
       .then(json => {
-        // console.log('json:',json)
         return sortAvailShiftsByCity(json);
       })
       .then(sortByCityObj => {
-        // console.log('sortByCityObj:',sortByCityObj)
         return groupByDates(sortByCityObj);
       })
       .then(groupByDates => {
-        // console.log('groupByDates:',groupByDates)
         dispatch(getAvailShiftsSucess(groupByDates));
-        return groupByDates;
       })
       .catch(error => dispatch(getAvailShiftsFailure(error)));
   };
-}
+};
 
 // Handle HTTP errors since fetch won't.
 const handleErrors = response => {
@@ -49,51 +45,45 @@ const handleErrors = response => {
 };
 
 const sortAvailShiftsByCity = availshiftsList => {
-  const bookLoaidngAdded = availshiftsList.map(shiftObj =>  ({...shiftObj, bookLoading:false}))
+  const now = new Date().getTime();
+  const booked = _.filter(availshiftsList, "booked");
 
-  const orderedShiftsList = _.orderBy(bookLoaidngAdded, "startTime", "asc");
+  const extraMetaAddedShiftList = availshiftsList.map(shiftObj => {
+    let overlapped = false;
+    booked.forEach(bookedShift => {
+      if (
+        bookedShift.startTime < shiftObj.endTime &&
+        bookedShift.endtime > shiftObj.endTime
+      ) {
+        if (!shiftObj.booked) {
+          overlapped = true;
+        }
+      }
+    });
+    const timeCheck = now < shiftObj.startTime ? false : true;
+    return {
+      ...shiftObj,
+      btnLoading: false,
+      timePassed: timeCheck,
+      overlapped
+    };
+  });
+
+  const orderedShiftsList = _.orderBy(
+    extraMetaAddedShiftList,
+    "startTime",
+    "asc"
+  );
 
   const cities = [...new Set(orderedShiftsList.map(item => item.area))].sort();
 
-  // let sortByCityObj = {};
-  // cities.map(cityName => {
-  //   sortByCityObj[cityName] = orderedShiftsList.filter(
-  //     shift => shift.area === cityName
-  //   );
-  // });
-  // console.log('*********about to go FOR MAP !!!!')
-
-  //  Pure funcitonal functions
-  const forMap = (target, shiftList) => (cityName, idx) => {
-    return target[cityName] = shiftList.filter(shiftObj => shiftObj.area === cityName)
-  }
-
-  const formaP = (cities) => (target, shiftList) => {
+  const formaP = cities => (target, shiftList) => {
     for (let cityName of cities) {
-      target[cityName] = shiftList.filter(
-          shift => shift.area === cityName
-        )
+      target[cityName] = shiftList.filter(shift => shift.area === cityName);
     }
-    return target
-  }
-
-
-  const sortByCityObj = formaP(cities)({},orderedShiftsList)
-  // const sortByCityObj = cities.map(forMap({},orderedShiftsList))//returns array due to .map
-  // console.log('!!!!!!!!!!!!!!End of formap',sortByCityObj)
-
-  // const animals = (first) => {
-  //   return second => {
-  //       const result = `I love ${first} and ${second}`
-  //       return result
-  //     }
-  // }
-  // const dog = animals('dog')
-  // dog('cat') // I love dog and cat
-  // dog('bird') // I love dog and bird
-
-  // cat = animals('cat')('dog')
-
+    return target;
+  };
+  const sortByCityObj = formaP(cities)({}, orderedShiftsList);
   return sortByCityObj;
 };
 
@@ -104,7 +94,9 @@ const groupByDates = sortByCityObj => {
       newObj,
       shift
     ) {
-      const formattedTime = moment(shift.startTime).format("LL");
+      const formattedTime = moment(shift.startTime)
+        .format("LL")
+        .replace(", 2018", "");
       newObj[formattedTime] = newObj[formattedTime] || [];
       newObj[formattedTime].push(shift);
       return newObj;

@@ -5,8 +5,9 @@ import AppRouter from "./components/router";
 import registerServiceWorker from "./registerServiceWorker";
 import store from "./configStore";
 import { Provider } from "react-redux";
+import { getAvailShiftsAsync } from "./actions/availShifts";
 
-const state = store.getState();
+store.dispatch(getAvailShiftsAsync());
 
 const jsx = (
   <Provider store={store}>

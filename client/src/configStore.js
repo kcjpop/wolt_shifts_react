@@ -1,20 +1,10 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import availShiftsReducer from "./reducers/availShifts";
-import myShifts from "./reducers/myShifts";
-// import bookShiftsReducer from "./reducers/bookShifts";
+import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { logger } from "redux-logger";
-import promise from "redux-promise";
+import availShiftsReducer from "./reducers/availShifts";
 
 // https://github.com/reduxjs/redux-thunk
 
-const store = createStore(
-  combineReducers({
-    availShifts: availShiftsReducer,
-    myShifts: myShifts,
-
-  }),
-  applyMiddleware(thunk, logger, promise)
-);
+const store = createStore(availShiftsReducer, applyMiddleware(thunk, logger));
 
 export default store;

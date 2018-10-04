@@ -41,9 +41,7 @@ const routes = [
     method: "POST",
     path: "/{id}/book",
     handler: async ({ params }) => {
-      console.log("SERVER: params in POST BOOK:", params);
       const shift = await db.shifts.get(params.id);
-      console.log("shift frm DB?:", shift);
 
       if (!shift) {
         throw Boom.notFound(`Shift not found with id ${params.id}`);
@@ -59,7 +57,6 @@ const routes = [
 
       const overlappingShiftExists = !!allShifts
         .filter(s => {
-          console.log("s:", s);
           return s.booked;
         })
         .find(s => s.startTime < shift.endTime && s.endTime > shift.startTime);
