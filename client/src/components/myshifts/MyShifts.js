@@ -1,28 +1,28 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import _ from "lodash";
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import _ from "lodash"
 
-import MyShiftRow from "./MyShiftRow";
+import MyShiftRow from "./MyShiftRow"
 
 class MyShifts extends Component {
   componentDidMount() {
-    console.log("My Shift page compo DID Mount");
+    console.log("My Shift page compo DID Mount")
   }
 
   renderStartPage() {
-    const fixedCities = ["Helsinki", "Tampere", "Turku"];
-    let newShiftObjByDate = {};
-    const { shiftsByCityObj } = this.props;
+    const fixedCities = ["Helsinki", "Tampere", "Turku"]
+    let newShiftObjByDate = {}
+    const { shiftsByCityObj } = this.props
     fixedCities.map(cityName => {
       for (let dateKey in shiftsByCityObj[cityName]) {
-        newShiftObjByDate[dateKey] = newShiftObjByDate[dateKey] || [];
-        const booked = _.filter(shiftsByCityObj[cityName][dateKey], "booked");
-        newShiftObjByDate[dateKey].push(...booked);
+        newShiftObjByDate[dateKey] = newShiftObjByDate[dateKey] || []
+        const booked = _.filter(shiftsByCityObj[cityName][dateKey], "booked")
+        newShiftObjByDate[dateKey].push(...booked)
       }
-      return newShiftObjByDate;
-    });
+      return newShiftObjByDate
+    })
 
-    const myShiftRowList = [];
+    const myShiftRowList = []
     for (let dateKey in newShiftObjByDate) {
       if (newShiftObjByDate[dateKey].length > 0) {
         myShiftRowList.push(
@@ -31,21 +31,21 @@ class MyShifts extends Component {
             date={dateKey}
             shiftList={newShiftObjByDate[dateKey]}
           />
-        );
+        )
       }
     }
-    return myShiftRowList;
+    return myShiftRowList
   }
 
   render() {
-    const { loading, error } = this.props;
+    const { loading, error } = this.props
 
     if (error) {
-      return <div> Error ! {error.message}</div>;
+      return <div> Error ! {error.message}</div>
     }
 
     if (loading) {
-      return <div>Loading...</div>;
+      return <div>Loading...</div>
     }
 
     if (this.renderStartPage().length > 0) {
@@ -53,12 +53,12 @@ class MyShifts extends Component {
         <section className="shifts">
           <div className="shifts__rows">{this.renderStartPage()}</div>
         </section>
-      );
+      )
     }
 
-    return <div>You have no booked shifts</div>;
+    return <div>You have no booked shifts</div>
   }
 }
-const mapStateToProps = store => ({ ...store });
+const mapStateToProps = store => ({ ...store })
 
-export default connect(mapStateToProps)(MyShifts);
+export default connect(mapStateToProps)(MyShifts)

@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from "react"
+import { NavLink } from "react-router-dom"
 
 const PageNotFound = () => {
   return (
@@ -15,7 +15,7 @@ const PageNotFound = () => {
         Click to go back
       </NavLink>
     </div>
-  );
-};
+  )
+}
 
-export default PageNotFound;
+export default PageNotFound

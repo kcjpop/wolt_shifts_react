@@ -1,11 +1,11 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from "react"
+import { NavLink } from "react-router-dom"
 
 const _isAvailShift = (match, location) => {
   if (location.pathname.includes("availshift")) {
-    return true;
+    return true
   }
-};
+}
 
 const Nav = () => {
   return (
@@ -27,7 +27,7 @@ const Nav = () => {
         </NavLink>
       </nav>
     </header>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav

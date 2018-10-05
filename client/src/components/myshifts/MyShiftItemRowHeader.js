@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const MyShiftItemRowHeader = ({ date, shiftAmount, shiftTimePeriod }) => {
   return (
@@ -11,7 +11,7 @@ const MyShiftItemRowHeader = ({ date, shiftAmount, shiftTimePeriod }) => {
         {shiftTimePeriod}
       </span>
     </header>
-  );
-};
+  )
+}
 
-export default MyShiftItemRowHeader;
+export default MyShiftItemRowHeader
