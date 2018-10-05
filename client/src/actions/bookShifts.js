@@ -43,8 +43,6 @@ export const bookShiftsFailure = (shift, date, error) => ({
   error
 });
 
-
-
 // Handle HTTP errors since fetch won't.
 const handleErrors = response => {
   console.log("ERROR CHAMBER:", response);

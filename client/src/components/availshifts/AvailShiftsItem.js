@@ -57,8 +57,7 @@ class AvailShiftsItem extends Component {
           <button
             className={`${this._btnColor()} ${this._btnDisabledColor()}`}
             onClick={this._handleBookOrCancelShift}
-            disabled={overlapped || timePassed}
-          >
+            disabled={overlapped || timePassed}>
             {this._handleButtonValue()}
           </button>
         </div>

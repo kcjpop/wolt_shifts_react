@@ -1,27 +1,25 @@
 .universal-header {
-    color:#F1F3F6;
-    padding-left: 16px;
-    padding-bottom: 15px;
-    
+  color: #f1f3f6;
+  padding-left: 16px;
+  padding-bottom: 15px;
 }
 
 .nav {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .nav__tab {
-    color:#A4B8D3;
+  color: #a4b8d3;
 }
 
 .nav__tab--selected {
-    color: #1D4FAE;
+  color: #1d4fae;
 }
 
 .nav__tab:first-child {
-    padding-right:5%;
+  padding-right: 5%;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
-

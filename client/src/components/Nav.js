@@ -14,8 +14,7 @@ const Nav = () => {
         <NavLink
           to="/myshift"
           className="nav__tab"
-          activeClassName="nav__tab--selected"
-        >
+          activeClassName="nav__tab--selected">
           My Shifts
         </NavLink>
 
@@ -23,8 +22,7 @@ const Nav = () => {
           to="/availshift/Helsinki"
           className="nav__tab"
           isActive={_isAvailShift}
-          activeClassName="nav__tab--selected"
-        >
+          activeClassName="nav__tab--selected">
           Available Shifts
         </NavLink>
       </nav>

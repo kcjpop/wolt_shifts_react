@@ -38,8 +38,7 @@ const MyShiftItem = ({ shift, date, dispatch }) => {
         <button
           className={`btn btn-cancel ${_btnDisabledColor(timePassed)}`}
           disabled={timePassed}
-          onClick={_handleBookCancel}
-        >
+          onClick={_handleBookCancel}>
           {_handleButtonValue()}
         </button>
       </div>

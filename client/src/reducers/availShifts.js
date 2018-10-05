@@ -24,7 +24,9 @@ const availShiftsReducer = (state = initialState, action) => {
       };
 
     case types.BOOK_SHIFTS_BEGIN:
-      state.shiftsByCityObj[action.shift.area][action.date] = state.shiftsByCityObj[action.shift.area][action.date].map(
+      state.shiftsByCityObj[action.shift.area][
+        action.date
+      ] = state.shiftsByCityObj[action.shift.area][action.date].map(
         shiftObj => {
           if (shiftObj.id === action.shift.id) {
             return { ...shiftObj, btnLoading: true };
@@ -38,7 +40,9 @@ const availShiftsReducer = (state = initialState, action) => {
       };
 
     case types.BOOK_SHIFTS_SUCCESS:
-      state.shiftsByCityObj[action.shift.area][action.date] = state.shiftsByCityObj[action.shift.area][action.date].map(
+      state.shiftsByCityObj[action.shift.area][
+        action.date
+      ] = state.shiftsByCityObj[action.shift.area][action.date].map(
         shiftObj => {
           if (shiftObj.id === action.shift.id) {
             return {
@@ -56,7 +60,9 @@ const availShiftsReducer = (state = initialState, action) => {
       };
 
     case types.BOOK_SHIFTS_FAILURE:
-      state.shiftsByCityObj[action.shift.area][action.date] = state.shiftsByCityObj[action.shift.area][action.date].map(
+      state.shiftsByCityObj[action.shift.area][
+        action.date
+      ] = state.shiftsByCityObj[action.shift.area][action.date].map(
         shiftObj => {
           if (shiftObj.id === action.shift.id) {
             return {
@@ -75,7 +81,9 @@ const availShiftsReducer = (state = initialState, action) => {
       };
 
     case types.CANCEL_SHIFTS_BEGIN:
-      state.shiftsByCityObj[action.shift.area][action.date] = state.shiftsByCityObj[action.shift.area][action.date].map(
+      state.shiftsByCityObj[action.shift.area][
+        action.date
+      ] = state.shiftsByCityObj[action.shift.area][action.date].map(
         shiftObj => {
           if (shiftObj.id === action.shift.id) {
             return { ...shiftObj, btnLoading: true };
@@ -89,7 +97,9 @@ const availShiftsReducer = (state = initialState, action) => {
       };
 
     case types.CANCEL_SHIFTS_SUCCESS:
-      state.shiftsByCityObj[action.shift.area][action.date] = state.shiftsByCityObj[action.shift.area][action.date].map(
+      state.shiftsByCityObj[action.shift.area][
+        action.date
+      ] = state.shiftsByCityObj[action.shift.area][action.date].map(
         shiftObj => {
           if (shiftObj.id === action.shift.id) {
             return {
@@ -107,7 +117,9 @@ const availShiftsReducer = (state = initialState, action) => {
       };
 
     case types.CANCEL_SHIFTS_FAILURE:
-      state.shiftsByCityObj[action.shift.area][action.date] = state.shiftsByCityObj[action.shift.area][action.date].map(
+      state.shiftsByCityObj[action.shift.area][
+        action.date
+      ] = state.shiftsByCityObj[action.shift.area][action.date].map(
         shiftObj => {
           if (shiftObj.id === action.shift.id) {
             return { ...shiftObj, btnLoading: false };

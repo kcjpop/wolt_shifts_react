@@ -11,8 +11,7 @@ const PageNotFound = () => {
         activeStyle={{
           fontWeight: "bold",
           color: "red"
-        }}
-      >
+        }}>
         Click to go back
       </NavLink>
     </div>
