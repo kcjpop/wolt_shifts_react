@@ -81,3 +81,10 @@ body {
 .shifts__status.shifts__status-overlapping {
   color: #e2006a;
 }
+
+svg {
+    width: 30%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+}
