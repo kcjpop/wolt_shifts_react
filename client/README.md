@@ -3,3 +3,4 @@
 
 ## To DOs
 - [ ] Use https://date-fns.org/ instead of moment for lowering the memory
+- [ ] Add testing
