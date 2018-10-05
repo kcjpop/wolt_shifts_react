@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bookShiftsAsync } from "../../actions/bookShifts";
-import { cancelShiftsAsync } from "../../actions/cancelShifts";
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { bookShiftsAsync } from "../../actions/bookShifts"
+import { cancelShiftsAsync } from "../../actions/cancelShifts"
 import { ReactComponent as RedSpinner } from "../../images/spinner_red.svg"
 import { ReactComponent as GreenSpinner } from "../../images/spinner_green.svg"
-
 
 class AvailShiftsItem extends Component {
   _btnColor = () => (this.props.bookStatus ? "btn btn-cancel" : "btn btn-book")
@@ -23,8 +22,7 @@ class AvailShiftsItem extends Component {
   _handleButtonValue = () => {
     const { btnLoading, bookStatus } = this.props
     if (btnLoading) {
-      return bookStatus ? <RedSpinner/> : <GreenSpinner/>;
-
+      return bookStatus ? <RedSpinner /> : <GreenSpinner />
     } else {
       return bookStatus ? "cancel" : "book"
     }

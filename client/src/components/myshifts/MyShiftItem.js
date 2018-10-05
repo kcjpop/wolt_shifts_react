@@ -1,8 +1,8 @@
 import React from "react"
 import moment from "moment"
 
-import { connect } from "react-redux";
-import { cancelShiftsAsync } from "../../actions/cancelShifts";
+import { connect } from "react-redux"
+import { cancelShiftsAsync } from "../../actions/cancelShifts"
 import { ReactComponent as Spinner } from "../../images/spinner_red.svg"
 
 const _btnDisabledColor = timePassed => {
@@ -10,7 +10,6 @@ const _btnDisabledColor = timePassed => {
 }
 
 const MyShiftItem = ({ shift, date, dispatch }) => {
-  // const { dispatch } = this.props
   const _handleBookCancel = () => {
     dispatch(cancelShiftsAsync(shift, date))
   }
@@ -18,8 +17,7 @@ const MyShiftItem = ({ shift, date, dispatch }) => {
   const _handleButtonValue = () => {
     const { btnLoading } = shift
     if (btnLoading) {
-      // return <img src={`../../images/spinner_red.svg`} alt="loader" />;
-      return <Spinner/>
+      return <Spinner />
     } else {
       return "Cancel"
     }
