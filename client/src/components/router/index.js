@@ -1,13 +1,13 @@
-import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import React from "react"
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"
 
-import MyShifts from "../myshifts/MyShifts";
-import AvailShifts from "../availshifts/AvailShifts";
-import Nav from "../Nav";
-import PageNotFound from "../PageNotFound";
+import MyShifts from "../myshifts/MyShifts"
+import AvailShifts from "../availshifts/AvailShifts"
+import Nav from "../Nav"
+import PageNotFound from "../PageNotFound"
 
 const AppRouter = () => {
-  const suppoertsHisotry = "pushState" in window.history;
+  const suppoertsHisotry = "pushState" in window.history
   return (
     <div>
       <BrowserRouter forceRefresh={!suppoertsHisotry}>
@@ -28,7 +28,7 @@ const AppRouter = () => {
         </div>
       </BrowserRouter>
     </div>
-  );
-};
+  )
+}
 
-export default AppRouter;
+export default AppRouter

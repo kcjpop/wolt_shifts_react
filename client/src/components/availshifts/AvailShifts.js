@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import AvailShiftsNav from "./AvailShiftsNav";
-import AvailShiftsRow from "./AvailShiftsRow";
-import { connect } from "react-redux";
+import React, { Component } from "react"
+import AvailShiftsNav from "./AvailShiftsNav"
+import AvailShiftsRow from "./AvailShiftsRow"
+import { connect } from "react-redux"
 
 class AvailShifts extends Component {
   _renderAvailNavs = () => {
-    const { shiftsByCityObj } = this.props;
-    const navList = [];
+    const { shiftsByCityObj } = this.props
+    const navList = []
     for (let cityKey in shiftsByCityObj) {
-      let availShiftAmount = 0;
+      let availShiftAmount = 0
       for (let dateKey in shiftsByCityObj[cityKey]) {
         shiftsByCityObj[cityKey][dateKey].map(shift => {
           if (!shift.booked && !shift.overlapped && !shift.timePassed) {
-            availShiftAmount += 1;
+            availShiftAmount += 1
           }
-        });
+        })
       }
       navList.push(
         <AvailShiftsNav
@@ -23,18 +23,18 @@ class AvailShifts extends Component {
           cityName={cityKey}
           availShiftAmount={availShiftAmount}
         />
-      );
+      )
     }
-    return navList;
-  };
+    return navList
+  }
 
   _renderAvailShiftsRows = () => {
-    const { shiftsByCityObj } = this.props;
-    const { pathname } = this.props.location;
-    const cityName = pathname.replace("/availshift/", "");
+    const { shiftsByCityObj } = this.props
+    const { pathname } = this.props.location
+    const cityName = pathname.replace("/availshift/", "")
 
-    const shiftRows = [];
-    console.log("cityName:", cityName);
+    const shiftRows = []
+    console.log("cityName:", cityName)
     for (let dateKey in shiftsByCityObj[cityName]) {
       shiftRows.push(
         <AvailShiftsRow
@@ -42,20 +42,20 @@ class AvailShifts extends Component {
           eachDateObjList={shiftsByCityObj[cityName][dateKey]}
           date={dateKey}
         />
-      );
+      )
     }
-    return shiftRows;
-  };
+    return shiftRows
+  }
 
   render() {
-    const { error, loading } = this.props;
+    const { error, loading } = this.props
 
     if (error) {
-      return <div>Error! {error.message}</div>;
+      return <div>Error! {error.message}</div>
     }
 
     if (loading) {
-      return <div>Loading...</div>;
+      return <div>Loading...</div>
     }
 
     return (
@@ -65,10 +65,10 @@ class AvailShifts extends Component {
           <div className="shifts__rows">{this._renderAvailShiftsRows()}</div>
         </section>
       </div>
-    );
+    )
   }
 }
 
-const mapStateToProps = store => ({ ...store });
+const mapStateToProps = store => ({ ...store })
 
-export default connect(mapStateToProps)(AvailShifts);
+export default connect(mapStateToProps)(AvailShifts)

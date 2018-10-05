@@ -7,28 +7,28 @@ import { ReactComponent as GreenSpinner } from "../../images/spinner_green.svg"
 
 
 class AvailShiftsItem extends Component {
-  _btnColor = () => (this.props.bookStatus ? "btn btn-cancel" : "btn btn-book");
+  _btnColor = () => (this.props.bookStatus ? "btn btn-cancel" : "btn btn-book")
 
   _btnDisabledColor = () =>
-    this.props.overlapped || this.props.timePassed ? " btn-disabled" : "";
+    this.props.overlapped || this.props.timePassed ? " btn-disabled" : ""
 
   _handleBookOrCancelShift = () => {
-    let { shift, date, bookStatus } = this.props;
-    const { dispatch } = this.props;
+    let { shift, date, bookStatus } = this.props
+    const { dispatch } = this.props
     bookStatus
       ? dispatch(cancelShiftsAsync(shift, date))
-      : dispatch(bookShiftsAsync(shift, date));
-  };
+      : dispatch(bookShiftsAsync(shift, date))
+  }
 
   _handleButtonValue = () => {
-    const { btnLoading, bookStatus } = this.props;
+    const { btnLoading, bookStatus } = this.props
     if (btnLoading) {
       return bookStatus ? <RedSpinner/> : <GreenSpinner/>;
 
     } else {
-      return bookStatus ? "cancel" : "book";
+      return bookStatus ? "cancel" : "book"
     }
-  };
+  }
 
   render() {
     const {
@@ -37,7 +37,7 @@ class AvailShiftsItem extends Component {
       bookStatus,
       overlapped,
       timePassed
-    } = this.props;
+    } = this.props
 
     return (
       <div className="shifts__content">
@@ -60,14 +60,13 @@ class AvailShiftsItem extends Component {
           <button
             className={`${this._btnColor()} ${this._btnDisabledColor()}`}
             onClick={this._handleBookOrCancelShift}
-            disabled={overlapped || timePassed}
-          >
+            disabled={overlapped || timePassed}>
             {this._handleButtonValue()}
           </button>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default connect()(AvailShiftsItem);
+export default connect()(AvailShiftsItem)

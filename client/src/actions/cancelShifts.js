@@ -1,27 +1,27 @@
-import * as types from './actionTypes'
-import {markOverlappedShifts} from "./myShifts"
+import * as types from "./actionTypes"
+import { markOverlappedShifts } from "./myShifts"
 
 export const cancelShiftsAsync = (shift, date) => {
   return dispatch => {
     dispatch(cancelShiftsBegin(shift, date))
     return fetch(`/shifts/${shift.id}/cancel`, {
-      method: "POST"})
+      method: "POST"
+    })
       .then(res => res.json())
       .then(handleErrors)
       .then(json => {
-        console.log('Cancel shift API output:', json)
+        console.log("Cancel shift API output:", json)
         return json
       })
-      .then(json=> dispatch(cancelShiftsSuccess(shift, date, json))
+      .then(json => dispatch(cancelShiftsSuccess(shift, date, json)))
+      .then(
+        json => dispatch(markOverlappedShifts(json)) // obj from cancelShiftsSuccess
       )
-      .then(json=>
-      dispatch(markOverlappedShifts(json)) // obj from cancelShiftsSuccess
-      )
-      .catch(error =>
-        { console.log('!!! ERROR:', error)
-          dispatch(cancelShiftsFailure(shift, date, error))})
+      .catch(error => {
+        console.log("!!! ERROR:", error)
+        dispatch(cancelShiftsFailure(shift, date, error))
+      })
   }
-
 }
 
 export const cancelShiftsBegin = (shift, date) => ({
@@ -44,12 +44,11 @@ export const cancelShiftsFailure = (shift, date, error) => ({
   error
 })
 
-
 // Handle HTTP errors since fetch won't.
 // Handle HTTP errors since fetch won't.
 const handleErrors = response => {
   if (response.statusCode) {
     throw Error(response.message)
   }
-  return response;
-};
+  return response
+}
