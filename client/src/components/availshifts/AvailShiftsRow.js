@@ -1,13 +1,13 @@
-import React from "react";
-import moment from "moment";
+import React from "react"
+import moment from "moment"
 
-import AvailShiftsItemHeader from "./AvailShiftsItemHeader";
-import AvailShiftsItem from "./AvailShiftsItem";
+import AvailShiftsItemHeader from "./AvailShiftsItemHeader"
+import AvailShiftsItem from "./AvailShiftsItem"
 
 const _renderAvailShiftsItems = (eachDateObjList, date) => {
   return eachDateObjList.map(shift => {
-    const startTime = moment(shift.startTime).format("HH:mm");
-    const endTime = moment(shift.endTime).format("HH:mm");
+    const startTime = moment(shift.startTime).format("HH:mm")
+    const endTime = moment(shift.endTime).format("HH:mm")
 
     return (
       <AvailShiftsItem
@@ -21,18 +21,18 @@ const _renderAvailShiftsItems = (eachDateObjList, date) => {
         overlapped={shift.overlapped}
         timePassed={shift.timePassed}
       />
-    );
-  });
-};
+    )
+  })
+}
 
 const AvailShiftsRow = props => {
-  const { eachDateObjList, date } = props;
+  const { eachDateObjList, date } = props
   return (
     <div className="shifts_row">
       <AvailShiftsItemHeader date={date} />
       {_renderAvailShiftsItems(eachDateObjList, date)}
     </div>
-  );
-};
+  )
+}
 
-export default AvailShiftsRow;
+export default AvailShiftsRow
