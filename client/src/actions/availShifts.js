@@ -1,6 +1,6 @@
 import * as types from "./actionTypes"
 import moment from "moment"
-import _ from "lodash"
+import { orderBy as _orderBy, filter as _filter} from "lodash"
 
 export const getAvailShiftsBegin = () => ({
   type: types.GET_AVAIL_SHIFTS_BEGIN
@@ -46,7 +46,7 @@ const handleErrors = response => {
 
 const sortAvailShiftsByCity = availshiftsList => {
   const now = new Date().getTime()
-  const booked = _.filter(availshiftsList, "booked")
+  const booked = _filter(availshiftsList, "booked")
 
   const extraMetaAddedShiftList = availshiftsList.map(shiftObj => {
     let overlapped = false
@@ -69,7 +69,7 @@ const sortAvailShiftsByCity = availshiftsList => {
     }
   })
 
-  const orderedShiftsList = _.orderBy(
+  const orderedShiftsList = _orderBy(
     extraMetaAddedShiftList,
     "startTime",
     "asc"

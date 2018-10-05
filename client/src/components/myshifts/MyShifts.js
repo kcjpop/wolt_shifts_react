@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import _ from "lodash"
+import { filter as _filter } from "lodash"
 
 import MyShiftRow from "./MyShiftRow"
 
@@ -16,7 +16,7 @@ class MyShifts extends Component {
     fixedCities.map(cityName => {
       for (let dateKey in shiftsByCityObj[cityName]) {
         newShiftObjByDate[dateKey] = newShiftObjByDate[dateKey] || []
-        const booked = _.filter(shiftsByCityObj[cityName][dateKey], "booked")
+        const booked = _filter(shiftsByCityObj[cityName][dateKey], "booked")
         newShiftObjByDate[dateKey].push(...booked)
       }
       return newShiftObjByDate
