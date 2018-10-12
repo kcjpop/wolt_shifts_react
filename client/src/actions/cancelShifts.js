@@ -45,7 +45,6 @@ export const cancelShiftsFailure = (shift, date, error) => ({
 })
 
 // Handle HTTP errors since fetch won't.
-// Handle HTTP errors since fetch won't.
 const handleErrors = response => {
   if (response.statusCode) {
     throw Error(response.message)

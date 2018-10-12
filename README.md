@@ -1,7 +1,9 @@
 # Wolt design Shift app
 
+## Demo
+<img src="http://recordit.co/fUBnXt9r39" width="400" alt="wolt-shift-app-demo">
 
-## Run app Instructions
+## Installation
 ```bash
 npm install
 cd client

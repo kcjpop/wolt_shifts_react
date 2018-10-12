@@ -18,7 +18,8 @@ const AppRouter = () => {
             <Redirect exact from="/" to="/myshift" />
 
             <Route
-              path="/availshift/(Helsinki|Tampere|Turku)"
+              path="/availshift/:cityName"
+              // path="/availshift/(Helsinki|Tampere|Turku)"
               component={AvailShifts}
             />
             <Redirect exact from="/availshift" to="/availshift/Helsinki" />

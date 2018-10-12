@@ -3,6 +3,8 @@ import AvailShiftsNav from "./AvailShiftsNav"
 import AvailShiftsRow from "./AvailShiftsRow"
 import { connect } from "react-redux"
 
+import selectAvailShifts from "../../selectors/availShifts"
+
 class AvailShifts extends Component {
   _renderAvailNavs = () => {
     const { shiftsByCityObj } = this.props
@@ -29,17 +31,13 @@ class AvailShifts extends Component {
   }
 
   _renderAvailShiftsRows = () => {
-    const { shiftsByCityObj } = this.props
-    const { pathname } = this.props.location
-    const cityName = pathname.replace("/availshift/", "")
-
+    const {cityObj} = this.props
     const shiftRows = []
-    console.log("cityName:", cityName)
-    for (let dateKey in shiftsByCityObj[cityName]) {
+    for (let dateKey in cityObj) {
       shiftRows.push(
         <AvailShiftsRow
           key={dateKey}
-          eachDateObjList={shiftsByCityObj[cityName][dateKey]}
+          eachDateObjList={cityObj[dateKey]}
           date={dateKey}
         />
       )
@@ -48,6 +46,7 @@ class AvailShifts extends Component {
   }
 
   render() {
+    console.log(111, this.props)
     const { error, loading } = this.props
 
     if (error) {
@@ -69,6 +68,14 @@ class AvailShifts extends Component {
   }
 }
 
-const mapStateToProps = store => ({ ...store })
+// const mapStateToProps = store => ({ ...store })
+
+const mapStateToProps = (store, ownProps) => {
+  return {
+    ...store,
+    cityObj : store.shiftsByCityObj[ownProps.match.params.cityName],
+    selectorAvailShifts: selectAvailShifts(store)
+  }
+}
 
 export default connect(mapStateToProps)(AvailShifts)
