@@ -1,7 +1,8 @@
 # Wolt design Shift app
 
 ## Demo
-<img src="http://recordit.co/fUBnXt9r39" width="400" alt="wolt-shift-app-demo">
+<img src="http://recordit.co/fUBnXt9r39.gif" width="400" alt="wolt-shift-app-demo">
+
 
 ## Installation
 ```bash
